@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {View, TouchableOpacity, Text, StyleSheet, Button} from 'react-native';
+import ChallengeList from './ChallengeList';
 
 const ChallengeScreen = () => {
   const [view, setView] = useState('list');
 
   return (
-    <SafeAreaView style={{paddingHorizontal: 34, paddingTop: 40}}>
+    <SafeAreaView style={{paddingTop: 40}}>
       <View style={styles.topTabWrap}>
         <TouchableOpacity
           style={[
@@ -42,6 +43,13 @@ const ChallengeScreen = () => {
           </View>
         </TouchableOpacity>
       </View>
+      {view === 'list' ? (
+        <ChallengeList />
+      ) : (
+        <View>
+          <Text>hi</Text>
+        </View>
+      )}
     </SafeAreaView>
   );
 };
@@ -49,6 +57,7 @@ const ChallengeScreen = () => {
 const styles = StyleSheet.create({
   topTabWrap: {
     flexDirection: 'row',
+    paddingHorizontal: 34,
     // width:
   },
   topTab: {paddingVertical: 8},
