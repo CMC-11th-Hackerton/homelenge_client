@@ -7,6 +7,12 @@ import ChallengeScreen from './ChallengeScreen';
 import ChallengeDetail from './ChallengeDetail';
 import MyChallengeStory from './MyChallengeStory';
 import FirstChallenge from './FirstChallenge';
+import SecondChallenge from './SecondChallenge';
+import ThirdChallenge from './ThirdChallenge';
+import FourChallenge from './FourChallenge';
+import FiveChallenge from './FiveChallenge';
+import LastChallenge from './LastChallenge';
+import MyStory from './MyStory';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +50,66 @@ const ChallengeStack = () => {
             fontSize: 20,
           },
         }}
+      />
+      <Stack.Screen
+        component={SecondChallenge}
+        name="SecondChallenge"
+        options={{
+          title: '모집하기',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 20,
+          },
+        }}
+      />
+      <Stack.Screen
+        component={ThirdChallenge}
+        name="ThirdChallenge"
+        options={{
+          title: '모집하기',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 20,
+          },
+        }}
+      />
+      <Stack.Screen
+        component={FourChallenge}
+        name="FourChallenge"
+        options={{
+          title: '모집하기',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 20,
+          },
+        }}
+      />
+      <Stack.Screen
+        component={FiveChallenge}
+        name="FiveChallenge"
+        options={{
+          title: '모집하기',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 20,
+          },
+        }}
+      />
+      <Stack.Screen
+        component={LastChallenge}
+        name="LastChallenge"
+        options={{
+          title: '모집하기',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 20,
+          },
+        }}
+      />
+      <Stack.Screen
+        component={MyStory}
+        name="MyStory"
+        options={{headerShown: false}}
       />
     </Stack.Navigator>
   );

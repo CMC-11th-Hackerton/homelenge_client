@@ -14,7 +14,7 @@ const MyChallengeStory = () => {
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView>
       <TouchableOpacity
         style={styles.back_btn}
         onPress={() => {
@@ -42,7 +42,9 @@ const MyChallengeStory = () => {
       <View style={{height: 64}}>
         <ScrollView horizontal={true}>
           <View style={styles.storyWrap}>
-            <View style={styles.story} />
+            <TouchableOpacity activeOpacity={0.7} onPress={() => {navigation.navigate('MyStory')}}>
+                <View style={styles.story} />
+            </TouchableOpacity>
             <View style={styles.story} />
             <View style={styles.story} />
             <View style={styles.story} />
