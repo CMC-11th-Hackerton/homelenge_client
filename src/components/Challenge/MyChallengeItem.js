@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import {theme} from '../../color';
 
 const ChallengeItem = ({onPress}) => {
   return (
@@ -18,8 +19,8 @@ const ChallengeItem = ({onPress}) => {
                 source={require('../../assets/imgs/rightArrow.png')}
               />
             </View>
-            <View style={styles.status}>
-              <Text style={{fontSize: 15}}>진행중</Text>
+            <View style={[styles.status, {backgroundColor: theme.lighten}]}>
+              <Text style={{fontSize: 15, color: 'white'}}>진행중</Text>
             </View>
           </View>
         </View>
@@ -68,7 +69,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'gray',
     width: 64,
   },
   arrow: {

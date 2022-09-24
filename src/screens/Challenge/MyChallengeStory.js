@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {
   SafeAreaView,
@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  Alert,
+  Dimensions,
 } from 'react-native';
 
 const MyChallengeStory = () => {
@@ -58,7 +60,12 @@ const MyChallengeStory = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.buttonWrap}>
-        <TouchableOpacity style={styles.recruitChallenge} activeOpacity={0.7}>
+        <TouchableOpacity
+          style={styles.recruitChallenge}
+          activeOpacity={0.7}
+          onPress={() => {
+            navigation.navigate('UploadStory');
+          }}>
           <Text style={{fontSize: 18, fontWeight: '600'}}>
             나의 챌린지 인증하기
           </Text>

@@ -13,6 +13,7 @@ import FourChallenge from './FourChallenge';
 import FiveChallenge from './FiveChallenge';
 import LastChallenge from './LastChallenge';
 import MyStory from './MyStory';
+import UploadStory from './UploadStory';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +39,11 @@ const ChallengeStack = () => {
       <Stack.Screen
         component={MyChallengeStory}
         name="MyChallengeStory"
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        component={UploadStory}
+        name="UploadStory"
         options={{headerShown: false}}
       />
       <Stack.Screen
