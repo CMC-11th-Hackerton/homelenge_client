@@ -70,7 +70,7 @@ const HomeScreen = () => {
             style={styles.joinChallenge}
             activeOpacity={0.7}
             onPress={() => {
-              navigation.navigate('Detail');
+              navigation.navigate('Challenge');
             }}>
             <Text style={{fontSize: 20, color: 'white'}}>챌린지 참여하기</Text>
           </TouchableOpacity>
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 83,
     borderRadius: 12,
-    backgroundColor: theme.default,
+    backgroundColor: theme.lighten,
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',

@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './HomeScreen';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Text} from 'react-native';
+import ChallengeScreen from '../Challenge/ChallengeScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,8 +26,8 @@ const HomeStack = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        component={DetailScreen}
-        name="Detail"
+        component={ChallengeScreen}
+        name="Challenge"
         options={{headerShown: false}}
       />
     </Stack.Navigator>
