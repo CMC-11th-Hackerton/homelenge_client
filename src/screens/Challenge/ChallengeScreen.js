@@ -3,19 +3,20 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {View, TouchableOpacity, Text, StyleSheet, Button} from 'react-native';
 import ChallengeList from './ChallengeList';
 import MyChallenge from './MyChallenge';
+import {theme} from '../../color';
 
 const ChallengeScreen = () => {
   const [view, setView] = useState('list');
 
   return (
-    <SafeAreaView style={{paddingTop: 40}}>
+    <SafeAreaView style={{paddingTop: 20, backgroundColor: 'white', flex: 1}}>
       <View style={styles.topTabWrap}>
         <TouchableOpacity
           style={[
             styles.topTab,
             {
-              borderBottomWidth: view === 'list' ? 3 : 0,
-              borderBottomColor: view === 'list' ? 'black' : '',
+              borderBottomWidth: view === 'list' ? 3 : 1,
+              borderBottomColor: view === 'list' ? theme.lighten : '#bbbbbb',
             },
           ]}
           onPress={() => {
@@ -23,16 +24,21 @@ const ChallengeScreen = () => {
           }}
           activeOpacity={1}>
           <View>
-            <Text style={styles.topTabText}>챌린지 리스트</Text>
+            <Text
+              style={[
+                styles.topTabText,
+                {color: view === 'list' ? theme.lighten : '#bbbbbb'},
+              ]}>
+              챌린지 리스트
+            </Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity
           style={[
             styles.topTab,
             {
-              marginLeft: 28,
-              borderBottomWidth: view === 'my' ? 3 : 0,
-              borderBottomColor: view === 'my' ? 'black' : '',
+              borderBottomWidth: view === 'my' ? 3 : 1,
+              borderBottomColor: view === 'my' ? theme.lighten : '#bbbbbb',
             },
           ]}
           onPress={() => {
@@ -40,7 +46,13 @@ const ChallengeScreen = () => {
           }}
           activeOpacity={1}>
           <View>
-            <Text style={styles.topTabText}>나의 챌린지</Text>
+            <Text
+              style={[
+                styles.topTabText,
+                {color: view === 'my' ? theme.lighten : '#bbbbbb'},
+              ]}>
+              나의 챌린지
+            </Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -52,10 +64,8 @@ const ChallengeScreen = () => {
 const styles = StyleSheet.create({
   topTabWrap: {
     flexDirection: 'row',
-    paddingHorizontal: 34,
-    // width:
   },
-  topTab: {paddingVertical: 8},
+  topTab: {paddingVertical: 8, flex: 1, alignItems: 'center'},
   topTabText: {fontSize: 16, fontWeight: '500'},
 });
 
