@@ -7,6 +7,7 @@ import ChallengeScreen from './ChallengeScreen';
 import ChallengeDetail from './ChallengeDetail';
 import MyChallengeStory from './MyChallengeStory';
 import FirstChallenge from './FirstChallenge';
+import UploadStory from './UploadStory';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +33,11 @@ const ChallengeStack = () => {
       <Stack.Screen
         component={MyChallengeStory}
         name="MyChallengeStory"
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        component={UploadStory}
+        name="UploadStory"
         options={{headerShown: false}}
       />
       <Stack.Screen
