@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 
-const ChallengeItem = () => {
+const ChallengeItem = ({onPress}) => {
   return (
-    <TouchableOpacity activeOpacity={0.7}>
+    <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
       <View style={styles.wrap}>
         <View style={styles.contentWrap}>
           <Image

@@ -1,131 +1,144 @@
 import React from 'react';
-import {SafeAreaView, View, Text, Button, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  Button,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useNavigation} from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
 
 const LoginScreen = () => {
-    const navigation = useNavigation();
+  const navigation = useNavigation();
 
-    return (
-        <SafeAreaView style={styles.container}>
-            <Text style={styles.headerText}>이메일 로그인</Text>
-            <Text style={styles.inputText}>이메일</Text>
-            <TextInput 
-                style={styles.textInput}
-                placeholder="example@haruwoundong.kr" 
-            />
-            <Text style={styles.inputText}>비밀번호</Text>
-            <TextInput 
-                style={styles.textInput}
-                placeholder="********" 
-            />
-            <View style={styles.block}>
-                <View style={styles.box} />
-                <Text>자동 로그인</Text>
-                <View style={styles.inner}>
-                    <Text style={styles.findID}>아이디 찾기</Text>
-                    <Text style={styles.findPW}>비밀번호 찾기</Text>
-                </View>
-            </View>
-            <TouchableOpacity 
-                style={{ 
-                    alignItems:'center',
-                    justifyContent:'center',
-                    height:56,
-                    borderRadius:18,
-                    backgroundColor: '#F0F0F0',
-                }}
-                >
-                <Text style={styles.loginBtn}>로그인</Text>
-            </TouchableOpacity>
-            <View style={styles.sign}>
-                <Text style={styles.guide}>아직 하루운동 회원이 아니세요?</Text>
-                <Text style={styles.signupText}>회원가입</Text>
-            </View>
-            {/* <Button
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.headerText}>이메일 로그인</Text>
+      <Text style={styles.inputText}>이메일</Text>
+      <TextInput
+        style={styles.textInput}
+        placeholder="example@haruwoundong.kr"
+      />
+      <Text style={styles.inputText}>비밀번호</Text>
+      <TextInput style={styles.textInput} placeholder="********" />
+      <View style={styles.block}>
+        <View style={styles.box} />
+        <Text>자동 로그인</Text>
+        <View style={styles.inner}>
+          <Text style={styles.findID}>아이디 찾기</Text>
+          <Text style={styles.findPW}>비밀번호 찾기</Text>
+        </View>
+      </View>
+      <TouchableOpacity
+        style={{
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: 56,
+          borderRadius: 18,
+          backgroundColor: '#F0F0F0',
+          marginHorizontal: 30,
+        }}>
+        <Text style={styles.loginBtn}>로그인</Text>
+      </TouchableOpacity>
+      <View style={styles.sign}>
+        <Text style={styles.guide}>아직 하루운동 회원이 아니세요?</Text>
+        <Text
+          style={styles.signupText}
+          onPress={() => {
+            navigation.navigate('Signup');
+          }}>
+          회원가입
+        </Text>
+      </View>
+      {/* <Button
                 title="siu"
                 onPress={() => {
                 navigation.navigate('Signup');
                 }}
             /> */}
-        </SafeAreaView>
-    );
+    </SafeAreaView>
+  );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: 'white',
-        paddingHorizontal: 30,
-        flex: 1,
-    },
-    headerText: {
-        paddingTop: 100,
-        paddingBottom: 60,
-        fontSize: 20,
-        color: '#464646',
-    },
-    inputText: {
-        marginLeft: 15,
-        color: '#464646',
-    },
-    textInput: {
-        marginTop: 5,
-        marginBottom: 15,
-        paddingHorizontal: 10,
-        fontSize: 17,
-        height: 56,
-        borderRadius: 18,
-        color: '#BDBFC1',
-        backgroundColor: '#FFFFFF',
-        borderColor: '#7B7F83',
-        borderWidth: 1,
-    },
-    block: {
-        flexDirection: 'row',
-        paddingHorizontal: 15,
-        paddingBottom: 20,
-    },
-    inner: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-    },
-    findID: {
-        marginRight: 10,
-        textDecorationLine: 'underline',
-    },
-    findPW: {
-        textDecorationLine: 'underline',
-    },
-    sign: {
-        marginTop: 15,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    signupText: {
-        marginLeft: 10,
-        textDecorationLine: 'underline',
-        color: '#121212',
-    },
-    box: {
-        width: 16,
-        height: 16,
-        borderWidth: 1,
-        backgroundColor: '#FFFFFF',
-        marginRight: 5,
-        borderRadius: 4,
-        borderColor: '#7B7F83',
-    },
-    guide: {
-        color: '#121212',
-    },
-    loginBtn: {
-        fontSize: 18,
-        color: '#909397',
-    }
-})
+  container: {
+    backgroundColor: 'white',
+    flex: 1,
+  },
+  headerText: {
+    paddingHorizontal: 30,
+    paddingTop: 100,
+    paddingBottom: 60,
+    fontSize: 20,
+    color: '#464646',
+  },
+  inputText: {
+    paddingHorizontal: 30,
+    marginLeft: 15,
+    color: '#464646',
+  },
+  textInput: {
+    marginTop: 5,
+    marginBottom: 15,
+    marginHorizontal: 30,
+    paddingHorizontal: 10,
+    fontSize: 17,
+    height: 56,
+    borderRadius: 18,
+    color: '#BDBFC1',
+    backgroundColor: '#FFFFFF',
+    borderColor: '#7B7F83',
+    borderWidth: 1,
+  },
+  block: {
+    flexDirection: 'row',
+    paddingHorizontal: 45,
+    paddingBottom: 20,
+  },
+  inner: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  findID: {
+    marginRight: 10,
+    textDecorationLine: 'underline',
+  },
+  findPW: {
+    textDecorationLine: 'underline',
+  },
+  sign: {
+    marginTop: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  signupText: {
+    marginLeft: 10,
+    textDecorationLine: 'underline',
+    color: '#121212',
+  },
+  box: {
+    width: 16,
+    height: 16,
+    borderWidth: 1,
+    backgroundColor: '#FFFFFF',
+    marginRight: 5,
+    borderRadius: 4,
+    borderColor: '#7B7F83',
+  },
+  guide: {
+    color: '#121212',
+  },
+  loginBtn: {
+    fontSize: 18,
+    color: '#909397',
+  },
+});
 
 export default LoginScreen;

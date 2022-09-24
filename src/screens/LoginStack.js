@@ -4,30 +4,27 @@ import {Text, Button} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useNavigation} from '@react-navigation/native';
 import LoginScreen from './Login/LoginScreen';
+import SignupScreen from './Login/SignupScreen';
 
 const Stack = createNativeStackNavigator();
-
-const SignupScreen = () => {
-  const navigation = useNavigation();
-  return (
-    <SafeAreaView>
-      <Text>signup</Text>
-      {/* <Button title='siu'/> */}
-    </SafeAreaView>
-  );
-};
 
 const LoginStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen 
-        component={LoginScreen} 
-        name="Login" 
+      <Stack.Screen
+        component={LoginScreen}
+        name="Login"
         options={{
           headerShown: false,
         }}
       />
-      <Stack.Screen component={SignupScreen} name="Signup" />
+      <Stack.Screen
+        component={SignupScreen}
+        name="Signup"
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack.Navigator>
   );
 };
