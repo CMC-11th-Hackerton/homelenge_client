@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {useNavigation} from '@react-navigation/native';
 import {
   View,
   StyleSheet,
@@ -10,6 +11,8 @@ import {
 
 export default function AddPost() {
   const [selected, setSelected] = useState(0);
+
+  const navigation = useNavigation();
 
   const handleClick = () => {
     console.log(selected);
@@ -41,41 +44,98 @@ export default function AddPost() {
           style={[
             styles.step_container,
             selected == 1
-              ? { backgroundColor: '#d8d8d8' }
-              : { backgroundColor: 'white' },
+              ? { borderColor: '#0066ff' }
+              : { borderColor: '#DDDDDD' },
           ]}
           onPress={() => handleClickStep1()}
         >
-          <Text style={styles.step_title}>1단계</Text>
-          <Text style={styles.step_info}>작은 일부터 시작할래요</Text>
+          <Text
+            style={[
+              styles.step_title,
+              selected == 1 ? { color: '#0066ff' } : { color: '#464646' },
+            ]}
+          >
+            1단계
+          </Text>
+          <Text
+            style={[
+              styles.step_info,
+              selected == 1 ? { color: '#0066ff' } : { color: '#464646' },
+            ]}
+          >
+            작은 일부터 시작할래요
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[
             styles.step_container,
             selected == 2
-              ? { backgroundColor: '#d8d8d8' }
-              : { backgroundColor: 'white' },
+              ? { borderColor: '#0066ff' }
+              : { borderColor: '#DDDDDD' },
           ]}
           onPress={() => handleClickStep2()}
         >
-          <Text style={styles.step_title}>2단계</Text>
-          <Text style={styles.step_info}>귀찮지만 도전하고싶어요</Text>
+          <Text
+            style={[
+              styles.step_title,
+              selected == 2 ? { color: '#0066ff' } : { color: '#464646' },
+            ]}
+          >
+            2단계
+          </Text>
+          <Text
+            style={[
+              styles.step_info,
+              selected == 2 ? { color: '#0066ff' } : { color: '#464646' },
+            ]}
+          >
+            귀찮지만 도전하고싶어요
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[
             styles.step_container,
             selected == 3
-              ? { backgroundColor: '#d8d8d8' }
-              : { backgroundColor: 'white' },
+              ? { borderColor: '#0066ff' }
+              : { borderColor: '#DDDDDD' },
           ]}
           onPress={() => handleClickStep3()}
         >
-          <Text style={styles.step_title}>3단계</Text>
-          <Text style={styles.step_info}>전 당장이라도 고치고 싶어요</Text>
+          <Text
+            style={[
+              styles.step_title,
+              selected == 3 ? { color: '#0066ff' } : { color: '#464646' },
+            ]}
+          >
+            3단계
+          </Text>
+          <Text
+            style={[
+              styles.step_info,
+              selected == 3 ? { color: '#0066ff' } : { color: '#464646' },
+            ]}
+          >
+            전 당장이라도 고치고 싶어요
+          </Text>
         </TouchableOpacity>
       </ScrollView>
-      <TouchableOpacity style={styles.next_btn} onPress={() => handleClick()}>
-        <Text style={styles.next_btn_text}>다음</Text>
+      <TouchableOpacity
+        style={[
+          styles.next_btn,
+          selected > 0
+            ? { backgroundColor: '#0066ff' }
+            : { backgroundColor: '#efefef' },
+        ]}
+        onPress={() => {navigation.navigate('SecondChallenge')}}
+      >
+        <Text
+          style={[
+            styles.next_btn_text,
+            selected > 0 ? { color: '#ffffff' } : { color: '#000000' },
+          ]}
+        >
+          다음
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -119,6 +179,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderColor: '#DDDDDD',
+    color: '#000000',
     borderRadius: 20,
     paddingVertical: 20,
     marginTop: 14,
