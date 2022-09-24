@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
 import {View, TouchableOpacity, Text, FlatList, StyleSheet} from 'react-native';
 import MyChallengeItem from '../../components/Challenge/MyChallengeItem';
 
 const mock = [1, 2, 3];
 const MyChallenge = () => {
   const [filter, setFilter] = useState('all');
+  const navigation = useNavigation();
 
   return (
     <View style={{marginTop: 20}}>
@@ -91,7 +93,7 @@ const MyChallenge = () => {
           </Text>
           <FlatList
             data={mock}
-            renderItem={({item}) => <MyChallengeItem />}
+            renderItem={({item}) => <MyChallengeItem onPress={() => {navigation.navigate('MyChallengeStory')}} />}
             keyExtractor={item => item}
           />
         </View>

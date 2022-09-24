@@ -5,6 +5,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useNavigation} from '@react-navigation/native';
 import ChallengeScreen from './ChallengeScreen';
 import ChallengeDetail from './ChallengeDetail';
+import MyChallengeStory from './MyChallengeStory';
+import FirstChallenge from './FirstChallenge';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +23,22 @@ const ChallengeStack = () => {
         name="ChallengeDetail"
         options={{
           title: '신청하기',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 20,
+          },
+        }}
+      />
+      <Stack.Screen
+        component={MyChallengeStory}
+        name="MyChallengeStory"
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        component={FirstChallenge}
+        name="FirstChallenge"
+        options={{
+          title: '모집하기',
           headerTitleAlign: 'center',
           headerTitleStyle: {
             fontSize: 20,

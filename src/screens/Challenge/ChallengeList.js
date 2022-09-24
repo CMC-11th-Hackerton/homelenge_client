@@ -107,10 +107,8 @@ const ChallengeList = () => {
         />
       </View>
       <View style={styles.buttonWrap}>
-        <TouchableOpacity style={styles.recruitChallenge} activeOpacity={0.7}>
-          <Text style={{fontSize: 18, fontWeight: '600', color: 'white'}}>
-            챌린지 모집하기
-          </Text>
+        <TouchableOpacity style={styles.recruitChallenge} activeOpacity={0.7} onPress={() => {navigation.navigate('FirstChallenge')}}>
+          <Text style={{fontSize: 18, fontWeight: '600'}}>챌린지 모집하기</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -135,7 +133,8 @@ const styles = StyleSheet.create({
   },
   listWrap: {
     marginTop: 20,
-    height: 450,
+    // height: 450,
+    height: 200,
   },
   buttonWrap: {
     paddingHorizontal: 34,
