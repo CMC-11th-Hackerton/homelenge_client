@@ -38,17 +38,19 @@ const ChallengeItem = ({onPress}) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 34,
+    marginHorizontal: 34,
     marginBottom: 20,
     borderRadius: 12,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+    borderWidth: 1,
+    borderColor: '#7c7c7c',
+    // shadowColor: '#000',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.25,
+    // shadowRadius: 4,
+    // elevation: 5,
   },
   wrap: {},
   contentWrap: {
