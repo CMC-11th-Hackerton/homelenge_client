@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {
   View,
@@ -10,11 +10,36 @@ import {
 } from 'react-native';
 import MyChallengeItem from '../../components/Challenge/MyChallengeItem';
 import {theme} from '../../color';
+import axios from 'axios';
 
-const mock = [1, 2, 3];
 const MyChallenge = () => {
   const [filter, setFilter] = useState('all');
+  const [curChalls, setCurChalls] = useState([]);
+  const [madeChalls, setMadeChalls] = useState([]);
+
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const url =
+      filter === 'all'
+        ? 'myChall'
+        : filter === 'ongoing'
+        ? 'myCurrChall'
+        : 'myEndChall';
+
+    axios
+      .get(`https://treaily.shop:443/challenge/${url}?id=1`)
+      .then(res => {
+        console.log(res);
+        if (res.status === 200) {
+          setCurChalls(res.data.currChalls);
+          setMadeChalls(res.data.madeChalls);
+        }
+      })
+      .catch(e => {
+        console.error(e);
+      });
+  }, [filter]);
 
   return (
     <View style={{marginTop: 20}}>
@@ -104,9 +129,16 @@ const MyChallenge = () => {
             모집한 챌린지
           </Text>
           <FlatList
-            data={mock}
-            renderItem={({item}) => <MyChallengeItem />}
-            keyExtractor={item => item}
+            data={madeChalls}
+            renderItem={({item}) => (
+              <MyChallengeItem
+                id={item.id}
+                url={item.imageUrl}
+                missionName={item.missionName}
+                finished={item.finished}
+              />
+            )}
+            keyExtractor={item => item.id}
           />
         </View>
         <View style={[styles.recruitWrap, {marginTop: 10}]}>
@@ -120,15 +152,19 @@ const MyChallenge = () => {
             참여중인 챌린지
           </Text>
           <FlatList
-            data={mock}
+            data={curChalls}
             renderItem={({item}) => (
               <MyChallengeItem
+                id={item.id}
+                url={item.imageUrl}
+                missionName={item.missionName}
+                finished={item.finished}
                 onPress={() => {
                   navigation.navigate('MyChallengeStory');
                 }}
               />
             )}
-            keyExtractor={item => item}
+            keyExtractor={item => item.id}
           />
         </View>
       </View>

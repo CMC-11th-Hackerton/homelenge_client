@@ -10,26 +10,32 @@ import {
   TouchableOpacity,
   ScrollView,
   StatusBar,
+  Dimensions,
 } from 'react-native';
 import {theme} from '../../color';
+import MI from 'react-native-vector-icons/MaterialIcons';
 
 const mock = [1, 2, 3, 4, 5];
+const screenWidth = Dimensions.get('window').width;
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   return (
     <ScrollView>
-      <SafeAreaView style={{paddingHorizontal: 26, paddingTop: 23}}>
+      <SafeAreaView
+        style={{
+          paddingHorizontal: 26,
+          paddingTop: 23,
+          backgroundColor: 'white',
+        }}>
+        <View style={styles.logoWrap}>
+          <Image source={require('../../assets/imgs/logo.png')} />
+        </View>
         <View style={styles.header}>
-          <View style={styles.profile}>
-            <View
-              style={{
-                width: 35,
-                height: 35,
-                borderRadius: 18,
-                backgroundColor: 'gray',
-              }}
-            />
+          <View style={styles.profileWrap}>
+            <View style={styles.profile}>
+              <Image source={require('../../assets/imgs/profile.png')} />
+            </View>
             <Text style={styles.headerText}>
               <Text style={{fontWeight: 'bold'}}>줄리</Text>님 안녕하세요!
             </Text>
@@ -40,7 +46,7 @@ const HomeScreen = () => {
           />
         </View>
         <View style={styles.circleWrap}>
-          <View style={styles.circle} />
+          <Image source={require('../../assets/imgs/cute.png')} />
         </View>
         <View style={styles.challengeWrap}>
           <TouchableOpacity style={styles.challenge} activeOpacity={0.7}>
@@ -49,6 +55,23 @@ const HomeScreen = () => {
                 <Text style={{fontSize: 18, fontWeight: '400'}}>
                   아침에 일어나기
                 </Text>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    marginTop: 12,
+                    alignItems: 'center',
+                  }}>
+                  <View style={styles.profile}>
+                    <Image source={require('../../assets/imgs/profile.png')} />
+                  </View>
+                  <View style={[styles.profile, {marginLeft: -12}]}>
+                    <Image source={require('../../assets/imgs/profile.png')} />
+                  </View>
+                  <Text
+                    style={{fontSize: 18, fontWeight: '500', marginLeft: 8}}>
+                    +4
+                  </Text>
+                </View>
               </View>
               <View style={styles.challengeStatus}>
                 <Text
@@ -59,10 +82,7 @@ const HomeScreen = () => {
                   }}>
                   진행중
                 </Text>
-                <Image
-                  style={{marginLeft: 8}}
-                  source={require('../../assets/imgs/rightArrow.png')}
-                />
+                <MI name="arrow-forward-ios" size={18} color={theme.lighten} />
               </View>
             </View>
           </TouchableOpacity>
@@ -83,7 +103,10 @@ const HomeScreen = () => {
             {mock.map((data, idx) => (
               <View style={{marginVertical: 8}} key={idx}>
                 <View style={styles.rankingItem}>
-                  <Text style={{fontSize: 18}}>1. 8시에 일어나서 이불개기</Text>
+                  <Text style={{fontSize: 18}}>
+                    {data}. 8시에 일어나서 이불개기
+                  </Text>
+                  <Image source={require('../../assets/imgs/upArrow.png')} />
                 </View>
               </View>
             ))}
@@ -95,14 +118,34 @@ const HomeScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  logoWrap: {
+    marginLeft: -26,
+    width: screenWidth,
+    borderBottomColor: '#dddddd',
+    borderBottomWidth: 1,
+    paddingBottom: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   header: {
+    marginTop: 16,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  profile: {
+  profileWrap: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  profile: {
+    width: 35,
+    height: 35,
+    borderRadius: 18,
+    borderColor: theme.lighten,
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
   },
   headerText: {fontSize: 26, marginLeft: 17},
   circleWrap: {
@@ -168,12 +211,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 11,
   },
   rankingItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     width: '100%',
     height: 56,
     borderRadius: 12,
     backgroundColor: 'white',
     padding: 18,
-    justifyContent: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

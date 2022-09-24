@@ -2,25 +2,28 @@ import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import {theme} from '../../color';
 
-const ChallengeItem = ({onPress}) => {
+const MyChallengeItem = ({onPress, id, url, missionName, finished}) => {
   return (
     <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
       <View style={styles.wrap}>
         <View style={styles.contentWrap}>
-          <Image
-            style={styles.img}
-            source={require('../../assets/imgs/notification.png')}
-          />
+          <Image style={styles.img} source={{uri: url}} />
           <View style={styles.content}>
             <View style={{position: 'relative'}}>
-              <Text>8시에 일어나서 이불개기</Text>
+              <Text>{missionName}</Text>
               <Image
                 style={styles.arrow}
                 source={require('../../assets/imgs/rightArrow.png')}
               />
             </View>
-            <View style={[styles.status, {backgroundColor: theme.lighten}]}>
-              <Text style={{fontSize: 15, color: 'white'}}>진행중</Text>
+            <View
+              style={[
+                styles.status,
+                {backgroundColor: finished ? '#a8a8a8' : theme.lighten},
+              ]}>
+              <Text style={{fontSize: 15, color: 'white'}}>
+                {finished ? '종료' : '진행중'}
+              </Text>
             </View>
           </View>
         </View>
@@ -53,8 +56,6 @@ const styles = StyleSheet.create({
   img: {
     width: 107,
     height: 60,
-    borderColor: 'black',
-    borderWidth: 1,
     borderRadius: 12,
   },
   content: {
@@ -78,4 +79,4 @@ const styles = StyleSheet.create({
     transform: [{translateY: 2}],
   },
 });
-export default ChallengeItem;
+export default MyChallengeItem;
