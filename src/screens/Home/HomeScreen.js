@@ -11,6 +11,7 @@ import {
   ScrollView,
   StatusBar,
 } from 'react-native';
+import {theme} from '../../color';
 
 const mock = [1, 2, 3, 4, 5];
 
@@ -33,7 +34,10 @@ const HomeScreen = () => {
               <Text style={{fontWeight: 'bold'}}>줄리</Text>님 안녕하세요!
             </Text>
           </View>
-          <Image source={require('../../assets/imgs/notification.png')} />
+          <Image
+            style={{marginTop: 8}}
+            source={require('../../assets/imgs/notification.png')}
+          />
         </View>
         <View style={styles.circleWrap}>
           <View style={styles.circle} />
@@ -47,7 +51,18 @@ const HomeScreen = () => {
                 </Text>
               </View>
               <View style={styles.challengeStatus}>
-                <Text style={{fontSize: 18, fontWeight: '500'}}>진행중</Text>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: 'bold',
+                    color: theme.lighten,
+                  }}>
+                  진행중
+                </Text>
+                <Image
+                  style={{marginLeft: 8}}
+                  source={require('../../assets/imgs/rightArrow.png')}
+                />
               </View>
             </View>
           </TouchableOpacity>
@@ -57,7 +72,7 @@ const HomeScreen = () => {
             onPress={() => {
               navigation.navigate('Detail');
             }}>
-            <Text style={{fontSize: 20}}>챌린지 참여하기</Text>
+            <Text style={{fontSize: 20, color: 'white'}}>챌린지 참여하기</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.ranking}>
@@ -108,7 +123,15 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 110,
     borderRadius: 12,
-    backgroundColor: 'gray',
+    backgroundColor: 'white',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
   challengeContentWrap: {
     flex: 1,
@@ -119,6 +142,7 @@ const styles = StyleSheet.create({
   challengeContent: {flex: 3},
   challengeStatus: {
     flex: 1,
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -127,9 +151,17 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 83,
     borderRadius: 12,
-    backgroundColor: 'gray',
+    backgroundColor: theme.default,
     alignItems: 'center',
     justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
   ranking: {
     marginTop: 24,
@@ -139,9 +171,17 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 56,
     borderRadius: 12,
-    backgroundColor: 'gray',
+    backgroundColor: 'white',
     padding: 18,
     justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
 });
 

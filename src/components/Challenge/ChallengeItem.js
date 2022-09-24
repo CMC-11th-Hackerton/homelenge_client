@@ -3,7 +3,10 @@ import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 
 const ChallengeItem = ({onPress}) => {
   return (
-    <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
+    <TouchableOpacity
+      activeOpacity={0.7}
+      onPress={onPress}
+      style={styles.container}>
       <View style={styles.wrap}>
         <View style={styles.contentWrap}>
           <Image
@@ -34,21 +37,20 @@ const ChallengeItem = ({onPress}) => {
 };
 
 const styles = StyleSheet.create({
-  wrap: {
-    marginHorizontal: 34,
+  container: {
+    paddingHorizontal: 34,
     marginBottom: 20,
-    borderWidth: 1,
     borderRadius: 12,
-    borderColor: '#aaaaaa',
-    // shadowColor: 'black',
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 3,
-    // },
-    // shadowOpacity: 0.3,
-    // shadowRadius: 5,
-    // elevation: 7,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
+  wrap: {},
   contentWrap: {
     flexDirection: 'row',
     borderBottomColor: '#cccccc',
