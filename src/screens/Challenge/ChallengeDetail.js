@@ -6,10 +6,16 @@ const ChallengeDetail = () => {
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
         <SafeAreaView style={styles.container}>
+            <View style={styles.wrap}>
+                <View style={styles.topPeopleWrap}>
+                    <Text>8시에 일어나서 이불개기</Text>
+                </View>
+            </View>
             <View style={styles.block}>
                 <View style={styles.box} />
                 <View>
-                    <Text style={styles.title}>8시에 일어나기</Text>
+                    <Text>미션명</Text>
+                    <Text style={styles.title}>나랑 같이 이불 갤 사람?,,,</Text>
                     <View style={styles.wrap}>
                         <View style={styles.peopleWrap}>
                             <Text>5명/13명</Text>
@@ -130,7 +136,7 @@ const styles = StyleSheet.create({
     },
     box: {
         width: 135,
-        height: 110,
+        height: 120,
         marginRight: 15,
         borderRadius: 12,
         backgroundColor: '#D9D9D9',
@@ -138,10 +144,21 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 22,
         marginBottom: 10,
+        // borderWidth: 1,
+        width: 150,
     },
     wrap: {
         flexDirection: 'row',
         marginBottom: 10,
+    },
+    topPeopleWrap: {
+        backgroundColor: '#EBEBEB',
+        height: 27,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 13,
+        marginRight: 10,
+        paddingHorizontal: 10,
     },
     peopleWrap: {
         backgroundColor: '#EBEBEB',
