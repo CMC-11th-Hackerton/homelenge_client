@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {View, TouchableOpacity, Text, StyleSheet, Button} from 'react-native';
 import ChallengeList from './ChallengeList';
+import MyChallenge from './MyChallenge';
 
 const ChallengeScreen = () => {
   const [view, setView] = useState('list');
@@ -43,13 +44,7 @@ const ChallengeScreen = () => {
           </View>
         </TouchableOpacity>
       </View>
-      {view === 'list' ? (
-        <ChallengeList />
-      ) : (
-        <View>
-          <Text>hi</Text>
-        </View>
-      )}
+      {view === 'list' ? <ChallengeList /> : <MyChallenge />}
     </SafeAreaView>
   );
 };
