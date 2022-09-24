@@ -140,8 +140,7 @@ const styles = StyleSheet.create({
   },
   listWrap: {
     marginTop: 20,
-    // height: 450,
-    height: 200,
+    height: 450,
   },
   buttonWrap: {
     paddingHorizontal: 34,
