@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {
   SafeAreaView,
@@ -10,13 +10,50 @@ import {
   ScrollView,
   Alert,
   Dimensions,
+  FlatList,
 } from 'react-native';
+import axios from 'axios';
+import {theme} from '../../color';
 
-const MyChallengeStory = () => {
+const MyChallengeStory = ({route}) => {
   const navigation = useNavigation();
+  const id = route.params.id;
+  const imgUrl = route.params.img;
+  const [data, setData] = useState([]);
+  const [stories, setStories] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`https://treaily.shop:443/challenge/room?id=${id}`)
+      .then(res => {
+        console.log(res);
+        if (res.status === 200) {
+          setData(res.data);
+        }
+      })
+      .catch(e => {
+        console.error(e);
+      });
+
+    axios
+      .get(`https://treaily.shop:443/story/detail?challengeId=${id}`)
+      .then(res => {
+        console.log(res);
+        if (res.status === 200) {
+          setStories(res.data.userStoryResList);
+        }
+      })
+      .catch(e => {
+        console.error(e);
+      });
+  }, []);
+
+  useEffect(() => {
+    console.log(stories);
+  }, [stories]);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{backgroundColor: 'white', flex: 1}}>
       <TouchableOpacity
         style={styles.back_btn}
         onPress={() => {
@@ -24,13 +61,27 @@ const MyChallengeStory = () => {
         }}>
         <Image source={require('../../assets/imgs/back.png')} />
       </TouchableOpacity>
+      <View style={styles.missionWrap}>
+        <Text>{data.missionName}</Text>
+      </View>
       <View style={styles.block}>
-        <View style={styles.box} />
-        <View>
-          <Text style={styles.title}>8시에 일어나서 이불개기</Text>
+        <Image
+          source={{uri: imgUrl}}
+          style={{width: 135, height: 135, borderRadius: 12}}
+        />
+        <View
+          style={{
+            marginLeft: 20,
+            justifyContent: 'space-between',
+            paddingVertical: 4,
+          }}>
+          <Text style={{color: '#979797', marginBottom: 8}}>챌린지</Text>
+          <Text style={styles.title}>{data.title}</Text>
           <View style={styles.wrap}>
             <View style={styles.peopleWrap}>
-              <Text>5명/13명</Text>
+              <Text style={{color: 'white'}}>
+                {data.counts}명/{data.currCounts}명
+              </Text>
             </View>
           </View>
         </View>
@@ -44,29 +95,36 @@ const MyChallengeStory = () => {
       <View style={{height: 64}}>
         <ScrollView horizontal={true}>
           <View style={styles.storyWrap}>
-            <TouchableOpacity activeOpacity={0.7} onPress={() => {navigation.navigate('MyStory')}}>
-                <View style={styles.story} />
-            </TouchableOpacity>
-            <View style={styles.story} />
-            <View style={styles.story} />
-            <View style={styles.story} />
-            <View style={styles.story} />
+            {stories.map((data, idx) => (
+              <TouchableOpacity
+                style={{marginRight: 20}}
+                key={idx}
+                activeOpacity={0.7}
+                onPress={() => {
+                  navigation.navigate('MyStory', {id: data.userId});
+                }}>
+                <Image
+                  source={{uri: data.imageUrl}}
+                  style={{width: 64, height: 64, borderRadius: 32}}
+                />
+              </TouchableOpacity>
+            ))}
           </View>
         </ScrollView>
       </View>
       <View style={styles.buttonWrap}>
         <TouchableOpacity style={styles.recruitChallenge} activeOpacity={0.7}>
-          <Text style={{fontSize: 18, fontWeight: '600'}}>지목하기</Text>
+          <Text style={{fontSize: 18, fontWeight: '600', color: 'white'}}>
+            지목하기
+          </Text>
         </TouchableOpacity>
-      </View>
-      <View style={styles.buttonWrap}>
         <TouchableOpacity
-          style={styles.recruitChallenge}
+          style={styles.storyBtn}
           activeOpacity={0.7}
           onPress={() => {
-            navigation.navigate('UploadStory');
+            navigation.navigate('UploadStory', {id});
           }}>
-          <Text style={{fontSize: 18, fontWeight: '600'}}>
+          <Text style={{fontSize: 18, fontWeight: '600', color: theme.lighten}}>
             나의 챌린지 인증하기
           </Text>
         </TouchableOpacity>
@@ -76,6 +134,18 @@ const MyChallengeStory = () => {
 };
 
 const styles = StyleSheet.create({
+  missionWrap: {
+    marginLeft: 30,
+    marginBottom: 20,
+    paddingVertical: 4,
+    paddingHorizontal: 12,
+    borderRadius: 13,
+    borderWidth: 1,
+    borderColor: 'black',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 170,
+  },
   container: {
     backgroundColor: 'white',
     flex: 1,
@@ -90,6 +160,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 20,
     paddingHorizontal: 30,
+  },
+  profile: {
+    width: 35,
+    height: 35,
+    borderRadius: 18,
+    borderColor: theme.lighten,
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
   },
   box: {
     width: 135,
@@ -106,7 +186,7 @@ const styles = StyleSheet.create({
   },
   wrap: {
     flexDirection: 'row',
-    marginBottom: 10,
+    alignItems: 'center',
   },
   topPeopleWrap: {
     backgroundColor: '#EBEBEB',
@@ -118,7 +198,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   peopleWrap: {
-    backgroundColor: '#EBEBEB',
+    backgroundColor: theme.lighten,
     width: 81,
     height: 27,
     alignItems: 'center',
@@ -191,7 +271,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   buttonWrap: {
-    marginTop: 20,
+    marginTop: 40,
     paddingHorizontal: 30,
   },
   recruitChallenge: {
@@ -199,7 +279,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 69,
-    backgroundColor: 'lightgray',
+    backgroundColor: theme.lighten,
+    shadowColor: 'black',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 7,
+  },
+  storyBtn: {
+    marginTop: 20,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 69,
+    backgroundColor: 'white',
     shadowColor: 'black',
     shadowOffset: {
       width: 0,

@@ -136,6 +136,12 @@ const MyChallenge = () => {
                 url={item.imageUrl}
                 missionName={item.missionName}
                 finished={item.finished}
+                onPress={() => {
+                  navigation.navigate('MyChallengeStory', {
+                    id: item.id,
+                    img: item.imageUrl,
+                  });
+                }}
               />
             )}
             keyExtractor={item => item.id}
@@ -160,7 +166,10 @@ const MyChallenge = () => {
                 missionName={item.missionName}
                 finished={item.finished}
                 onPress={() => {
-                  navigation.navigate('MyChallengeStory');
+                  navigation.navigate('MyChallengeStory', {
+                    id: item.id,
+                    img: item.imageUrl,
+                  });
                 }}
               />
             )}

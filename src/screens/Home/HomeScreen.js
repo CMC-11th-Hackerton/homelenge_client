@@ -27,6 +27,7 @@ const HomeScreen = () => {
           paddingHorizontal: 26,
           paddingTop: 23,
           backgroundColor: 'white',
+          flex: 1,
         }}>
         <View style={styles.logoWrap}>
           <Image source={require('../../assets/imgs/logo.png')} />
@@ -160,7 +161,7 @@ const styles = StyleSheet.create({
   },
   challengeWrap: {
     alignItems: 'center',
-    marginTop: 80,
+    marginTop: 60,
   },
   challenge: {
     width: '100%',
