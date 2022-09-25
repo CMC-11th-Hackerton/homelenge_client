@@ -1,5 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import {
   View,
   Text,
@@ -15,7 +16,17 @@ const mock = [1, 2, 3, 4, 5];
 
 const ChallengeList = () => {
   const [step, setStep] = useState(1);
+  const [data, setData] = useState([]);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    axios.get(`https://treaily.shop:443/challenge?step=${step}`, {
+    })
+    .then(res => {
+      console.log(res.data);
+      setData(res.data);
+    })
+  }, [step])
 
   return (
     <View style={{marginTop: 20}}>
@@ -95,12 +106,13 @@ const ChallengeList = () => {
       </View>
       <View style={styles.listWrap}>
         <FlatList
-          data={mock}
+          data={data}
           renderItem={({item}) => (
             <ChallengeItem
               onPress={() => {
-                navigation.navigate('ChallengeDetail');
+                navigation.navigate('ChallengeDetail', {item: item});
               }}
+              item={item}
             />
           )}
           keyExtractor={item => item}

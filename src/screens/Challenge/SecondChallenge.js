@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {useNavigation} from '@react-navigation/native';
+import axios from 'axios';
 import {
   View,
   StyleSheet,
@@ -8,6 +9,7 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function AddPost2() {
   const [selected, setSelected] = useState(0);
@@ -58,6 +60,14 @@ export default function AddPost2() {
     setSelected(10);
   };
 
+  const save = async () => {
+    try{
+      await AsyncStorage.setItem('missionId', selected.toString());
+    } catch (e) {
+
+    }
+  }
+
   return (
     <View style={styles.container}>
       {/* <TouchableOpacity style={styles.back_btn}>
@@ -77,7 +87,7 @@ export default function AddPost2() {
           ]}
           onPress={() => handleClickStep1()}
         >
-          <View style={styles.challange_image}></View>
+          <Image style={styles.challange_image} source={{uri: "https://moaimage-bucket.s3.ap-northeast-2.amazonaws.com/post/%EB%B9%A8%EB%9E%98.png"}}/>
           <Text
             style={[
               styles.challange_title,
@@ -96,7 +106,7 @@ export default function AddPost2() {
           ]}
           onPress={() => handleClickStep2()}
         >
-          <View style={styles.challange_image}></View>
+          <Image style={styles.challange_image} source={{uri: "https://health.chosun.com/site/data/img_dir/2020/11/30/2020113002033_0.jpg"}}/>
           <Text
             style={[
               styles.challange_title,
@@ -115,7 +125,7 @@ export default function AddPost2() {
           ]}
           onPress={() => handleClickStep3()}
         >
-          <View style={styles.challange_image}></View>
+          <Image style={styles.challange_image} source={{uri: "https://s3.ap-northeast-2.amazonaws.com/img.kormedi.com/news/article/__icsFiles/artimage/2015/01/01/c_km601/476673_540.jpg"}}/>
           <Text
             style={[
               styles.challange_title,
@@ -134,7 +144,7 @@ export default function AddPost2() {
           ]}
           onPress={() => handleClickStep4()}
         >
-          <View style={styles.challange_image}></View>
+          <Image style={styles.challange_image} source={{uri: "https://img.vogue.co.kr/vogue/2019/01/style_5c381f5c5dc34-930x621.jpg"}}/>
           <Text
             style={[
               styles.challange_title,
@@ -153,7 +163,7 @@ export default function AddPost2() {
           ]}
           onPress={() => handleClickStep5()}
         >
-          <View style={styles.challange_image}></View>
+          <Image style={styles.challange_image} source={{uri: "https://moaimage-bucket.s3.ap-northeast-2.amazonaws.com/post/HKPU_04_04_pic1.jpg"}}/>
           <Text
             style={[
               styles.challange_title,
@@ -172,14 +182,14 @@ export default function AddPost2() {
           ]}
           onPress={() => handleClickStep6()}
         >
-          <View style={styles.challange_image}></View>
+          <Image style={styles.challange_image} source={{uri: "https://moaimage-bucket.s3.ap-northeast-2.amazonaws.com/post/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C+(1).jfif"}}/>
           <Text
             style={[
               styles.challange_title,
               selected == 6 ? { color: '#0066ff' } : { color: '#464646' },
             ]}
           >
-            3km 달리기
+            방청소하기
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -191,14 +201,14 @@ export default function AddPost2() {
           ]}
           onPress={() => handleClickStep7()}
         >
-          <View style={styles.challange_image}></View>
+          <Image style={styles.challange_image} source={{uri: "https://moaimage-bucket.s3.ap-northeast-2.amazonaws.com/post/99DC01475B51308931.jfif"}}/>
           <Text
             style={[
               styles.challange_title,
               selected == 7 ? { color: '#0066ff' } : { color: '#464646' },
             ]}
           >
-            8시에 일어나서 이불개기
+            명상하기
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -210,7 +220,7 @@ export default function AddPost2() {
           ]}
           onPress={() => handleClickStep8()}
         >
-          <View style={styles.challange_image}></View>
+          <Image style={styles.challange_image} source={{uri: "https://moaimage-bucket.s3.ap-northeast-2.amazonaws.com/post/%EB%B9%A8%EB%9E%98.png"}}/>
           <Text
             style={[
               styles.challange_title,
@@ -229,7 +239,7 @@ export default function AddPost2() {
           ]}
           onPress={() => handleClickStep9()}
         >
-          <View style={styles.challange_image}></View>
+          <Image style={styles.challange_image} source={{uri: "https://moaimage-bucket.s3.ap-northeast-2.amazonaws.com/post/%EB%B9%A8%EB%9E%98.png"}}/>
           <Text
             style={[
               styles.challange_title,
@@ -248,7 +258,7 @@ export default function AddPost2() {
           ]}
           onPress={() => handleClickStep10()}
         >
-          <View style={styles.challange_image}></View>
+          <Image style={styles.challange_image} source={{uri: "https://moaimage-bucket.s3.ap-northeast-2.amazonaws.com/post/%EB%B9%A8%EB%9E%98.png"}}/>
           <Text
             style={[
               styles.challange_title,
@@ -266,7 +276,10 @@ export default function AddPost2() {
             ? { backgroundColor: '#0066ff' }
             : { backgroundColor: '#efefef' },
         ]}
-        onPress={() => {navigation.navigate('ThirdChallenge')}}
+        onPress={() => {
+          navigation.navigate('ThirdChallenge')
+          save()
+        }}
       >
         <Text
           style={[

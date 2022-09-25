@@ -8,6 +8,7 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function AddPost() {
   const [selected, setSelected] = useState(0);
@@ -29,6 +30,14 @@ export default function AddPost() {
   const handleClickStep3 = e => {
     setSelected(3);
   };
+
+  const save = async () => {
+    try{
+      await AsyncStorage.setItem('step', selected.toString());
+    } catch (e) {
+
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -126,7 +135,10 @@ export default function AddPost() {
             ? { backgroundColor: '#0066ff' }
             : { backgroundColor: '#efefef' },
         ]}
-        onPress={() => {navigation.navigate('SecondChallenge')}}
+        onPress={() => {
+          navigation.navigate('SecondChallenge')
+          save()
+        }}
       >
         <Text
           style={[

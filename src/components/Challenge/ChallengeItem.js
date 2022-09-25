@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 
-const ChallengeItem = ({onPress}) => {
+const ChallengeItem = ({onPress, item}) => {
   return (
     <TouchableOpacity
       activeOpacity={0.7}
@@ -11,24 +11,24 @@ const ChallengeItem = ({onPress}) => {
         <View style={styles.contentWrap}>
           <Image
             style={styles.img}
-            source={require('../../assets/imgs/notification.png')}
+            source={{uri:item.imageUrl}}
           />
           <View style={styles.content}>
             <View style={{position: 'relative'}}>
-              <Text>8시에 일어나서 이불개기</Text>
+              <Text>{item.challengeName}</Text>
               <Image
                 style={styles.arrow}
                 source={require('../../assets/imgs/rightArrow.png')}
               />
             </View>
             <View style={styles.people}>
-              <Text>13명/5명</Text>
+              <Text>{item.currCounts}명/{item.counts}명</Text>
             </View>
           </View>
         </View>
         <View style={styles.deadlineWrap}>
           <Text style={{fontSize: 15, fontWeight: '500'}}>
-            마감시간 02:00:25
+            마감시간 {(item.endTime).substr(11,8)}
           </Text>
         </View>
       </View>
@@ -63,8 +63,7 @@ const styles = StyleSheet.create({
   img: {
     width: 107,
     height: 60,
-    borderColor: 'black',
-    borderWidth: 1,
+    borderRadius: 12,
   },
   content: {
     flex: 1,
@@ -78,8 +77,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'gray',
-    width: 80,
+    backgroundColor: '#ffffff',
+    borderColor: '#979797',
+    borderWidth: 1,
+    width: 82,
   },
   arrow: {
     position: 'absolute',

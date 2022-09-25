@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {useNavigation} from '@react-navigation/native';
+import axios from 'axios';
 import {
   View,
   StyleSheet,
@@ -11,6 +12,7 @@ import {
   Modal,
   Pressable,
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function AddPost6() {
   const [hour, setHour] = useState('');
@@ -22,11 +24,41 @@ export default function AddPost6() {
   const navigation = useNavigation();
 
   const handleClick = () => {
+    console.log('hello4');
+    load()
     setModalVisible(true);
     console.log(hour);
     console.log(min);
     console.log(sec);
   };
+
+  const load = async () => {
+    try{
+      console.log('hello1');
+      const step = await AsyncStorage.getItem('step');
+      const missionId = await AsyncStorage.getItem('missionId');
+      const counts = await AsyncStorage.getItem('counts');
+      const title = await AsyncStorage.getItem('title');
+      const content = await AsyncStorage.getItem('content');
+      console.log(step);
+      console.log('hello2');
+
+      axios.post(`https://treaily.shop:443/challenge`, {
+        step:parseInt(step),
+        missionId:parseInt(missionId),
+        counts:parseInt(counts),
+        title,
+        content,
+        leaderId: 1,
+        endTime: hour + min + sec,
+    })
+    .then(res => {
+      console.log(res);
+    })
+    }catch (e){
+      console.log('hello3');
+    }
+  }
 
   return (
     <View style={styles.container}>

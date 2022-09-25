@@ -1,54 +1,96 @@
 import React, {useState} from 'react';
-import {SafeAreaView, View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, Modal, Pressable, Alert} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {SafeAreaView, View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, Modal, Pressable, Alert, Image} from 'react-native';
 
-const ChallengeDetail = () => {
+const ChallengeDetail = ({route}) => {
     const [modalVisible, setModalVisible] = useState(false);
+    const navigation = useNavigation();
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
         <SafeAreaView style={styles.container}>
             <View style={styles.wrap}>
                 <View style={styles.topPeopleWrap}>
-                    <Text>8시에 일어나서 이불개기</Text>
+                    <Text style={{color: 'black'}}>{route.params.item.missionName}</Text>
                 </View>
             </View>
             <View style={styles.block}>
-                <View style={styles.box} />
+                <Image
+                    style={styles.img}
+                    source={{uri:route.params.item.imageUrl}}
+                />
                 <View>
                     <Text>미션명</Text>
-                    <Text style={styles.title}>나랑 같이 이불 갤 사람?,,,</Text>
+                    <Text style={styles.title}>{route.params.item.challengeName}</Text>
                     <View style={styles.wrap}>
                         <View style={styles.peopleWrap}>
-                            <Text>5명/13명</Text>
+                            <Text style={{color: 'white'}}>{route.params.item.currCounts}명/{route.params.item.counts}명</Text>
                         </View>
                     </View>
                 </View>
             </View>
             <View style={styles.deadlineTitle}>
-                <Text>시작 시간까지</Text>
+                <Text style={{
+                    fontWeight: '700',
+                    fontSize: 16,
+                    color: 'black'
+                }}>시작 시간까지</Text>
                 <Text>마감시간 변경</Text>
             </View>
             <View style={styles.inputWrap}>
-                <TextInput placeholder="1" style={styles.deadlineInput} />
+                <View style={styles.timeWrap}>
+                    <Text style={{
+                        fontweight: 'bold',
+                        fontSize: 15
+                    }}>{(route.params.item.endTime).substr(11,2)}</Text>
+                </View>
                 <Text style={styles.time}>시간</Text>
-                <TextInput placeholder="1" style={styles.deadlineInput} />
+                <View style={styles.timeWrap}>
+                    <Text style={{
+                        fontweight: 'bold',
+                        fontSize: 15}}>{(route.params.item.endTime).substr(14,2)}</Text>
+                </View>
                 <Text style={styles.time}>분</Text>
-                <TextInput placeholder="1" style={styles.deadlineInput} />
+                <View style={styles.timeWrap}>
+                    <Text style={{
+                        fontweight: 'bold',
+                        fontSize: 15}}>{(route.params.item.endTime).substr(17,2)}</Text>
+                </View>
                 <Text style={styles.time}>초</Text>
             </View>
-            <Text>방장님의 말</Text>
+            <Text style={{
+                    fontWeight: '700',
+                    fontSize: 16,
+                    color: 'black',
+                    marginBottom: 10
+                }}>방장님의 말</Text>
             <View style={styles.talkBox}>
                 <Text style={styles.talk}>
-                    저는 완전한 집순이 입니다... 이런 제가 
-                    가끔은 좋기도,,,안 좋기도 하네요.. 이런 저와
-                    함께 부지런해지실 분 구합니다. 
+                    {route.params.item.content}
                 </Text>
             </View>
-            <Text>현재 참여한 사람</Text>
+            <Text style={{
+                    fontWeight: '700',
+                    fontSize: 16,
+                    color: 'black',
+                    marginTop: 10
+                }}>현재 참여한 사람</Text>
             <View style={styles.profileWrap}>
-                <View style={styles.profile} />
-                <View style={styles.profile} />
-                <View style={styles.profile} />
-                <View style={styles.profile} />
+                <Image
+                    style={styles.profile}
+                    source={require('../../assets/imgs/sample.jpg')}
+                />
+                                <Image
+                    style={styles.profile}
+                    source={require('../../assets/imgs/sample2.jpg')}
+                />
+                                <Image
+                    style={styles.profile}
+                    source={require('../../assets/imgs/sample3.jpg')}
+                />
+                                <Image
+                    style={styles.profile}
+                    source={require('../../assets/imgs/sample.jpg')}
+                />
             </View>
             <Modal
                 animationType="fade"
@@ -64,7 +106,10 @@ const ChallengeDetail = () => {
                     <Text style={styles.modalText}>신청이 완료되었습니다!</Text>
                     <Pressable
                         style={[styles.button, styles.buttonClose]}
-                        onPress={() => setModalVisible(!modalVisible)}
+                        onPress={() => 
+                            {setModalVisible(!modalVisible)
+                            navigation.navigate('Challenge')}
+                        }
                     >
                     <Text style={styles.textStyle}>확인</Text>
                     </Pressable>
@@ -77,7 +122,7 @@ const ChallengeDetail = () => {
                     justifyContent:'center',
                     height:56,
                     borderRadius:18,
-                    backgroundColor: '#F0F0F0',
+                    backgroundColor: '#0066FF',
                 }}
                 onPress={() => setModalVisible(true)}
                 >
@@ -130,16 +175,24 @@ const styles = StyleSheet.create({
         paddingHorizontal: 30,
         paddingVertical: 30,
     },
+    timeWrap: {
+        width: 60,
+        height: 52,
+        borderWidth: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 12,
+        borderColor: '#0066ff',
+    },
     block: {
         flexDirection: 'row',
         marginBottom: 20,
     },
-    box: {
+    img: {
         width: 135,
         height: 120,
         marginRight: 15,
         borderRadius: 12,
-        backgroundColor: '#D9D9D9',
     },
     title: {
         fontSize: 22,
@@ -152,7 +205,9 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     topPeopleWrap: {
-        backgroundColor: '#EBEBEB',
+        backgroundColor: '#ffffff',
+        borderColor: '#000000',
+        borderWidth: 1,
         height: 27,
         alignItems: 'center',
         justifyContent: 'center',
@@ -161,7 +216,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
     },
     peopleWrap: {
-        backgroundColor: '#EBEBEB',
+        backgroundColor: '#0066ff',
         width: 81,
         height: 27,
         alignItems: 'center',
@@ -183,7 +238,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     inputWrap: {
-        marginVertical: 20,
+        marginVertical: 30,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
@@ -197,13 +252,17 @@ const styles = StyleSheet.create({
     },
     time: {
         paddingHorizontal: 10,
+        fontSize: 15,
+        fontWeight: 'bold'
     },
     talkBox: {
         marginTop: 10,
         marginBottom: 20,
         borderRadius: 12,
         height: 217,
-        backgroundColor: '#EBEBEB',
+        backgroundColor: '#ffffff',
+        borderWidth: 1,
+        borderColor: '#000000'
     },
     talk:{
         paddingHorizontal: 20,
@@ -223,7 +282,8 @@ const styles = StyleSheet.create({
     },
     startBtn: {
         fontSize: 18,
-        color: '#909397',
+        color: '#ffffff',
+        fontWeight: 'bold',
     },
     centeredView: {
         flex: 1,

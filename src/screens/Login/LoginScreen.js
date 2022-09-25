@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   View,
@@ -15,6 +15,8 @@ const Stack = createNativeStackNavigator();
 
 const LoginScreen = () => {
   const navigation = useNavigation();
+  const [id, setId] = useState('');
+  const [pw, setPw] = useState('');
 
   return (
     <SafeAreaView style={styles.container}>
@@ -22,10 +24,17 @@ const LoginScreen = () => {
       <Text style={styles.inputText}>이메일</Text>
       <TextInput
         style={styles.textInput}
+        value={id}
+        onChangeText={text => setId(text)}
         placeholder="example@haruwoundong.kr"
       />
       <Text style={styles.inputText}>비밀번호</Text>
-      <TextInput style={styles.textInput} placeholder="********" />
+      <TextInput
+          style={styles.textInput} 
+          value={pw}
+          onChangeText={text => setPw(text)}
+          secureTextEntry={true}
+          placeholder="********" />
       <View style={styles.block}>
         <View style={styles.box} />
         <Text>자동 로그인</Text>
@@ -35,18 +44,27 @@ const LoginScreen = () => {
         </View>
       </View>
       <TouchableOpacity
-        style={{
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: 56,
-          borderRadius: 18,
-          backgroundColor: '#F0F0F0',
-          marginHorizontal: 30,
-        }}>
-        <Text style={styles.loginBtn}>로그인</Text>
+
+        style={[
+          {
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: 56,
+            borderRadius: 18,
+            marginHorizontal: 30,
+          },
+          id != '' && pw!=''
+            ? { backgroundColor: '#0066ff' }
+            : { backgroundColor: '#efefef' },
+        ]}>
+        <Text
+        style={[
+          styles.loginBtn,
+          id != '' && pw!=''? { color: '#ffffff' } : { color: '#000000' },
+        ]}>로그인</Text>
       </TouchableOpacity>
       <View style={styles.sign}>
-        <Text style={styles.guide}>아직 하루운동 회원이 아니세요?</Text>
+        <Text style={styles.guide}>아직 집린지 회원이 아니세요?</Text>
         <Text
           style={styles.signupText}
           onPress={() => {

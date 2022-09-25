@@ -9,6 +9,7 @@ import {
   ScrollView,
   TextInput,
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function AddPost5() {
   const [content, setContent] = useState('');
@@ -18,6 +19,14 @@ export default function AddPost5() {
   const handleClick = () => {
     console.log(content);
   };
+
+  const save = async () => {
+    try{
+      await AsyncStorage.setItem('content', content);
+    } catch (e) {
+
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -44,7 +53,10 @@ export default function AddPost5() {
             ? { backgroundColor: '#0066ff' }
             : { backgroundColor: '#efefef' },
         ]}
-        onPress={() => {navigation.navigate('LastChallenge')}}
+        onPress={() => {
+          navigation.navigate('LastChallenge')
+          save()
+        }}
       >
         <Text
           style={[
