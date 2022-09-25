@@ -22,7 +22,7 @@ const ChallengeItem = ({onPress}) => {
               />
             </View>
             <View style={styles.people}>
-              <Text>13명/5명</Text>
+              <Text style={{color: '#7c7c7c'}}>13명/5명</Text>
             </View>
           </View>
         </View>
@@ -74,11 +74,13 @@ const styles = StyleSheet.create({
   people: {
     marginTop: 10,
     borderRadius: 13,
+    borderWidth: 1,
+    borderColor: '#7c7c7c',
     paddingVertical: 2,
     paddingHorizontal: 12,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'gray',
+    backgroundColor: 'white',
     width: 80,
   },
   arrow: {
