@@ -73,6 +73,8 @@ const styles = StyleSheet.create({
   people: {
     marginTop: 10,
     borderRadius: 13,
+    borderWidth: 1,
+    borderColor: '#7c7c7c',
     paddingVertical: 2,
     paddingHorizontal: 12,
     alignItems: 'center',
